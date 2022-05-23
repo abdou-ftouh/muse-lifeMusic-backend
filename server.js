@@ -1,13 +1,22 @@
 require("dotenv").config();
 
-const { PORT = 4000, MONGODB_URL } = process.env;
 // import express
 const express = require("express");
 const app = express();
 
+const { PORT = 4000, MONGODB_URL } = process.env;
+const eventControler= require('./controlers/eventControler')
+const bandControler= require('./controlers/bandControler')
 
-app.get("/", (req, res) => {
-    res.send("Welcome to our server");
-});
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
+
+app.use(eventControler)
+app.use(bandControler)
+
+
+
+
+// LISTENER
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
