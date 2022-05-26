@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const MONGODB_URL = 
 process.env.NODE_ENV === 'production'
 ? process.env.DB_URL
-: "mongodb+srv://test:test@cluster0.o9dmx.mongodb.net/musicProject?retryWrites=true&w=majority";
+: process.env.MONGODB_URL;
 
 
 mongoose.connect(MONGODB_URL);
