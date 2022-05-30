@@ -29,14 +29,10 @@ const bandSchema = new mongoose.Schema({
             },
             location:{
                 name:String,
-                streetAddress: String,
-                city: String,
-                zipCode:String ,
-                country: String,
-                coordinates:{
-                    latitude: Number,
-                    longitude: Number
-                }
+                address:String,
+                latitude: Number,
+                longitude: Number
+               
             }
 
         }
