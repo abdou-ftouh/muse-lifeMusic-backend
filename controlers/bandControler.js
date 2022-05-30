@@ -1,10 +1,8 @@
-const express = require('express');
 
-const router = express.Router();
+
 const Band = require('../models/bandModel')
 
-
-router.get("/", async (req, res) => {
+ const getBands= async (req, res) => {
     try {
       
         res.json(await Band.find({}));
@@ -13,8 +11,10 @@ router.get("/", async (req, res) => {
         res.status(400).json(error);
         console.log(error)
     }
-});
-router.post("/", async (req, res) => {
+};
+
+
+ const createBands= async (req, res) => {
   try {
    
     res.json(await Band.create(req.body));
@@ -24,9 +24,9 @@ router.post("/", async (req, res) => {
       console.log(error)
 
   }
-});
+};
 
-router.delete('/:id', async (req, res) => {
+ const deleteBands=async (req, res) => {
   try {
     res.json(await Band.findOneAndRemove({ _id: req.params.id }));
   } catch (error) {
@@ -34,8 +34,10 @@ router.delete('/:id', async (req, res) => {
     console.log(error)
   }
 
-})
-router.patch("/:id", async(req, res) => {
+};
+
+
+ const updateBands= async(req, res) => {
  
      try {
        res.json(await  Band.findOneAndUpdate({ _id: req.params.id }, req.body))
@@ -43,7 +45,7 @@ router.patch("/:id", async(req, res) => {
       res.status(400).json(error);
       console.log(error)
      }
-});
+};
 
 
-module.exports = router;
+module.exports={getBands,createBands,deleteBands,updateBands};

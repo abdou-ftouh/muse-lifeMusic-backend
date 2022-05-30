@@ -1,10 +1,12 @@
-const express = require('express');
 
-const router = express.Router();
 const {User,validate} = require('../models/userModel')
 const bcrypt= require('bcrypt');
 
-router.post("/", async (req, res) => {
+
+
+
+
+const createUser= async (req, res) => {
     try {
       const {error} = validate(req.body);
       if(error)
@@ -13,7 +15,7 @@ router.post("/", async (req, res) => {
       const user= await User.findOne({email:req.body.email});
       if(user)
         return res.status(409).send({message:"You given an email already excite!!"})
-    const salt= await bcrypt.genSalt(Number(process.env.SALT));
+    const salt= await bcrypt.genSalt(Number(process.env.SALT)); //The Salt Package Manager, or SPM, enables Salt formulas to be packaged to simplify distribution to Salt masters. 
     const hashPassword= await bcrypt.hash(req.body.password,salt);
     await new User({...req.body,password:hashPassword}).save();
     res.status(201).send({message:"User Created successfully"})
@@ -21,10 +23,10 @@ router.post("/", async (req, res) => {
       //send error
         res.status(500).send({message:"Server Error"})
     }
-});
+};
 
 
-module.exports = router;
+module.exports = {createUser};
 
 
 
