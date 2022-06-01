@@ -1,10 +1,11 @@
+const formatEvents = require( './Google_APIs/Events_n_Places' );
 
 
 const Band = require('../models/bandModel')
 
  const getBands= async (req, res) => {
     try {
-      
+
         res.json(await Band.find({}));
     } catch (error) {
       //send error
@@ -16,8 +17,12 @@ const Band = require('../models/bandModel')
 
  const createBands= async (req, res) => {
   try {
-   
-    res.json(await Band.create(req.body));
+    const calendarID = req.body.calendarID
+    const myEvents = await formatEvents(calendarID)
+    myEvents.forEach(event => req.body.events.push(event))
+    console.log(req.body)
+    res.json(await Band.create(req.body))
+
   } catch (error) {
     //send error
       res.status(400).json(error);
