@@ -6,17 +6,15 @@ const bandSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    members:[{
-        firstName:{
-            type:String
-        },
-        lastName:{
-            type:String
-        },
-        roles:[{
-            type:String
-        }],
-        images:[String]
+    members:[
+        {
+            memberName: {
+                type: String
+            },
+            roles:[{
+                type:String
+            }],
+            images:[String]
 
     } ],
     events:[
@@ -28,22 +26,22 @@ const bandSchema = new mongoose.Schema({
                 type:Date
             },
             location:{
-                name:String,
-                address:String,
-                latitude: Number,
-                longitude: Number
+                name: String,
+                address: String,
+                lat: Number,
+                lng: Number
                
             }
 
         }
     ],
-    mediaLinks:[{
+    mediaLinks:{
         facebook:String,
         instagram:String,
         spotify:String,
         tiktok:String,
         required:false
-    }],
+    },
     calendarType:{
       type:String,
       required:true  
@@ -51,7 +49,7 @@ const bandSchema = new mongoose.Schema({
     calendarID:{
         type:String,
         unique:true,
-        required:true  
+        // required:true  
       },
       images:[
           {
