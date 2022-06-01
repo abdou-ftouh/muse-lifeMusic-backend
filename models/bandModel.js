@@ -48,8 +48,8 @@ const bandSchema = new mongoose.Schema({
     },
     calendarID:{
         type:String,
-        unique:true,
-        // required:true  
+        // unique:true,
+        required:true  
       },
       images:[
           {
