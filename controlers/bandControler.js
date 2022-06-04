@@ -46,6 +46,8 @@ const Band = require('../models/bandModel')
  
      try {
        res.json(await  Band.findOneAndUpdate({ _id: req.params.id }, req.body))
+       console.log(req.body)
+      //  console.log(req.params)
      } catch (error) {
       res.status(400).json(error);
       console.log(error)

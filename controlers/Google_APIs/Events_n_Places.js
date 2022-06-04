@@ -62,7 +62,8 @@ const formatEvents = async function format_ASYNC_Events (calendarID) {
         calendarId: calendarID,
         maxResults: 20,
         updatedMin: "2022-05-15T22:00:00.000Z",
-        startTime: new Date(),
+        // updatedMin: "2022-05-15T22:00:00.000Z",
+        startTime: new Date()
     };
 
     const eventsArray = await getEventsList(calendarParams)
@@ -70,8 +71,10 @@ const formatEvents = async function format_ASYNC_Events (calendarID) {
     const allEventsArr = eventsArray.map((event) => {
         return getPlace(event.location)
             .then((res) => {
-                const startTime = event.start.dateTime
-                const endTime = event.end.dateTime
+                let startTime = event.start.dateTime;
+                let endTime = event.end.dateTime;
+                startTime = new Date(startTime);
+                endTime = new Date(endTime);
                 const address = event.location.slice(event.location.indexOf(',') + 2 , event.location.length) 
                 const name = event.location.split(',')[0]
                 const lat = res[0].lat
